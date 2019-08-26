@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
         var horzDown = Input.GetButtonDown("Horizontal");
         var horz = Input.GetAxisRaw("Horizontal") * (horzDown ? 1 : 0);
 
+        var vertDown = Input.GetButtonDown("Vertical");
+        var vert = Input.GetAxisRaw("Vertical") * (vertDown ? 1 : 0);
+
         if (Input.GetAxisRaw("Jump") > 0)
         {
             _anim.SetBool(IsJumping, true);
@@ -32,6 +35,14 @@ public class PlayerController : MonoBehaviour
         else if (horz < 0)
         {
             transform.Rotate(Vector3.up * -90);
+        }
+        else if (vert > 0)
+        {
+            transform.Translate(0.1f, 0, 0);
+        }
+        else if (vert < 0)
+        {
+            transform.Translate(-0.1f, 0, 0);
         }
     }
 
