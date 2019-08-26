@@ -14,14 +14,24 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        var horzDown = Input.GetButtonDown("Horizontal");
+        var horz = Input.GetAxisRaw("Horizontal") * (horzDown ? 1 : 0);
+
         if (Input.GetAxisRaw("Jump") > 0)
         {
             _anim.SetBool(IsJumping, true);
         }
-
-        if (Input.GetAxisRaw("Fire1") > 0)
+        else if (Input.GetAxisRaw("Fire1") > 0)
         {
             _anim.SetBool(IsMagic, true);
+        }
+        else if (horz > 0)
+        {
+            transform.Rotate(Vector3.up * 90);
+        }
+        else if (horz < 0)
+        {
+            transform.Rotate(Vector3.up * -90);
         }
     }
 
