@@ -10,8 +10,17 @@ public class GenerateWorld : MonoBehaviour
         for (var i = 0; i < 20; ++i)
         {
             var platformNumber = Random.Range(0, platformPrefabs.Length);
-            Instantiate(platformPrefabs[platformNumber], pos, Quaternion.identity);
-            pos.z += 10;
+            var go = Instantiate(platformPrefabs[platformNumber], pos, Quaternion.identity);
+
+            if (go.CompareTag("stairsUp")) pos.y += 5;
+            else if (go.CompareTag("stairsDown"))
+            {
+                pos.y -= 5;
+                go.transform.position = pos;
+                go.transform.Rotate(new Vector3(0, 180, 0));
+            }
+
+            pos.z -= 10;
         }
     }
 }
