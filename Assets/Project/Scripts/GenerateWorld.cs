@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GenerateWorld : MonoBehaviour
 {
@@ -28,7 +30,8 @@ public class GenerateWorld : MonoBehaviour
             }
             else if (go.CompareTag("platformTSection"))
             {
-                _dummyTraveller.transform.Rotate(new Vector3(0, 90, 0));
+                var sign = Mathf.Sign(Random.Range(0, 2) - 0.5f);
+                _dummyTraveller.transform.Rotate(new Vector3(0, sign * 90, 0));
 
                 // T-sections are a bit longer than other platforms, so we need an extra translation here.
                 _dummyTraveller.transform.Translate(Vector3.forward * -10);
