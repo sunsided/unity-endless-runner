@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 200434158}
   - component: {fileID: 200434157}
   - component: {fileID: 200434156}
+  - component: {fileID: 200434159}
   m_Layer: 0
   m_Name: DummyWall
   m_TagString: Wall
@@ -487,6 +488,40 @@ Transform:
   m_Father: {fileID: 1418151324}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &200434159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200434155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dffe3bf0dbb60ed979785ea47a6a3926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bricks:
+  - {fileID: 1218706098}
+  - {fileID: 1413995843}
+  - {fileID: 1909031569}
+  - {fileID: 2123021289}
+  - {fileID: 1594422809}
+  - {fileID: 861332178}
+  - {fileID: 1514757441}
+  - {fileID: 269540888}
+  - {fileID: 949441812}
+  - {fileID: 1264049214}
+  - {fileID: 1359649495}
+  - {fileID: 705110123}
+  - {fileID: 1533074707}
+  - {fileID: 642946220}
+  - {fileID: 1086638655}
+  - {fileID: 254958656}
+  - {fileID: 13283137}
+  - {fileID: 1030031817}
+  - {fileID: 189083476}
+  - {fileID: 1300341018}
+  - {fileID: 642719675}
 --- !u!1 &254958656
 GameObject:
   m_ObjectHideFlags: 0
