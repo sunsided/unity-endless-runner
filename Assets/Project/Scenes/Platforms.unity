@@ -177,18 +177,18 @@ MonoBehaviour:
     expandable: 0
   - prefab: {fileID: 3851133363436972105, guid: 3e800e93169abe4dca0512f2ae1d1039,
       type: 3}
-    amount: 1
+    amount: 2
     expandable: 0
   - prefab: {fileID: 942996176700423960, guid: d51fd304691aaef7faa85bd91dc77477, type: 3}
     amount: 1
     expandable: 0
   - prefab: {fileID: 8727284579193232046, guid: 29a31583126653c93bb723e4e41a8c12,
       type: 3}
-    amount: 1
+    amount: 2
     expandable: 0
   - prefab: {fileID: 8209953264858674889, guid: 7c120de74b3a6a617809bcd04acd1b44,
       type: 3}
-    amount: 1
+    amount: 2
     expandable: 0
   pooledItems: []
 --- !u!4 &69372094
