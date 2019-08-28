@@ -38,7 +38,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Side Shift
+    m_Name: Rotate
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: q
