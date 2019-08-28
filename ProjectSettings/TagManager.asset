@@ -11,6 +11,7 @@ TagManager:
   - platformZ
   - stairsDown
   - Fire
+  - Wall
   layers:
   - Default
   - TransparentFX
