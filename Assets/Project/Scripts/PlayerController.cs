@@ -8,6 +8,7 @@ namespace Project.Scripts
     {
         public static GameObject Player;
         public static GameObject CurrentPlatform;
+        public static bool Dead;
 
         private static readonly int IsJumping = Animator.StringToHash("isJumping");
         private static readonly int IsMagic = Animator.StringToHash("isMagic");
@@ -33,6 +34,7 @@ namespace Project.Scripts
             if (other.gameObject.CompareTag("Fire"))
             {
                 _anim.SetTrigger(IsDead);
+                Dead = true;
             }
             else
             {

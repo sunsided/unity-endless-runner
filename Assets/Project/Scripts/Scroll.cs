@@ -13,6 +13,8 @@ namespace Project.Scripts
 
         private void FixedUpdate()
         {
+            if (PlayerController.Dead) return;
+
             const float speed = -0.1f;
             transform.position += _player.transform.forward * speed;
 
