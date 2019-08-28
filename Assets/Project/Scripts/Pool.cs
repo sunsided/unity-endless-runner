@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Project.Scripts
@@ -20,12 +22,9 @@ namespace Project.Scripts
                 return item;
             }
 
-            foreach (var item in items)
+            foreach (var item in items.Where(item => item.expandable))
             {
-                if (!item.expandable) continue;
-                var obj = Instantiate(item.prefab);
-                obj.SetActive(false);
-                pooledItems.Add(obj);
+                CreateInactiveAndAddToPool(item.prefab);
             }
 
             return null;
@@ -36,12 +35,23 @@ namespace Project.Scripts
             Singleton = this;
             foreach (var item in items)
             {
-                for (var i = 0; i < item.amount; ++i)
-                {
-                    var obj = Instantiate(item.prefab);
-                    obj.SetActive(false);
-                    pooledItems.Add(obj);
-                }
+                CreateInactiveAndAddToPool(item.prefab, item.amount);
+            }
+        }
+
+        private void CreateInactiveAndAddToPool([NotNull] GameObject prefab)
+        {
+            var obj = Instantiate(prefab);
+            obj.name = prefab.name;
+            obj.SetActive(false);
+            pooledItems.Add(obj);
+        }
+
+        private void CreateInactiveAndAddToPool([NotNull] GameObject prefab, int count)
+        {
+            for (var i = 0; i < count; ++i)
+            {
+                CreateInactiveAndAddToPool(prefab);
             }
         }
 

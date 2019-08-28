@@ -5,7 +5,6 @@ namespace Project.Scripts
 {
     public class GenerateWorld : MonoBehaviour
     {
-        public GameObject[] platformPrefabs;
         private GameObject _dummyTraveller;
 
         void Start()
@@ -41,6 +40,7 @@ namespace Project.Scripts
                     _dummyTraveller.transform.Translate(Vector3.forward * -10);
                 }
 
+                // TODO: Currently, the player is running into -z direction ("backwards"). We might want to fix this instead of living with it.
                 _dummyTraveller.transform.Translate(Vector3.forward * -10);
             }
         }

@@ -1,13 +1,21 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Project.Scripts
 {
     public class PlayerController : MonoBehaviour
     {
+        public static GameObject Player;
+
         private static readonly int IsJumping = Animator.StringToHash("isJumping");
         private static readonly int IsMagic = Animator.StringToHash("isMagic");
         private Animator _anim;
+
+        private void Awake()
+        {
+            Player = gameObject;
+        }
 
         private void Start()
         {
