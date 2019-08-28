@@ -10,22 +10,26 @@ namespace Project.Scripts
         public static GameObject CurrentPlatform;
         public static bool Dead;
 
+        public float jumpForce = 5;
+
         private static readonly int IsJumping = Animator.StringToHash("isJumping");
         private static readonly int IsMagic = Animator.StringToHash("isMagic");
         private static readonly int IsDead = Animator.StringToHash("isDead");
         private Animator _anim;
+        private Rigidbody _rb;
         private bool _canTurn;
         private Vector3 _startPosition;
 
         private void Awake()
         {
             Player = gameObject;
+            _anim = GetComponent<Animator>();
+            _rb = GetComponent<Rigidbody>();
         }
 
         private void Start()
         {
             _startPosition = Player.transform.position;
-            _anim = GetComponent<Animator>();
             GenerateWorld.RunDummy();
         }
 
@@ -79,11 +83,12 @@ namespace Project.Scripts
             var shiftDown = Input.GetButtonDown("Horizontal");
             var shift = Input.GetAxisRaw("Horizontal") * (shiftDown ? 1 : 0);
 
-            if (Input.GetAxisRaw("Jump") > 0)
+            if (Input.GetButtonDown("Jump"))
             {
                 _anim.SetBool(IsJumping, true);
+                _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
-            else if (Input.GetAxisRaw("Fire1") > 0)
+            else if (Input.GetButtonDown("Fire1"))
             {
                 _anim.SetBool(IsMagic, true);
             }
