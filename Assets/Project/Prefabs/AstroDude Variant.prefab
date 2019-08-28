@@ -156,6 +156,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AstroDude
       objectReference: {fileID: 0}
+    - target: {fileID: 345566784467415734, guid: dd6c6fc869c7e45cc8c988eb74c6eaaa,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 345566784467578582, guid: dd6c6fc869c7e45cc8c988eb74c6eaaa,
         type: 3}
       propertyPath: m_LocalPosition.x

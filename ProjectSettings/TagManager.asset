@@ -10,6 +10,7 @@ TagManager:
   - platformTSection
   - platformZ
   - stairsDown
+  - Fire
   layers:
   - Default
   - TransparentFX

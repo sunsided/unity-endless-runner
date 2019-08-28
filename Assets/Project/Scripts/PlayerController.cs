@@ -11,6 +11,7 @@ namespace Project.Scripts
 
         private static readonly int IsJumping = Animator.StringToHash("isJumping");
         private static readonly int IsMagic = Animator.StringToHash("isMagic");
+        private static readonly int IsDead = Animator.StringToHash("isDead");
         private Animator _anim;
         private bool _canTurn;
         private Vector3 _startPosition;
@@ -29,7 +30,14 @@ namespace Project.Scripts
 
         private void OnCollisionEnter([NotNull] Collision other)
         {
-            CurrentPlatform = other.gameObject;
+            if (other.gameObject.CompareTag("Fire"))
+            {
+                _anim.SetTrigger(IsDead);
+            }
+            else
+            {
+                CurrentPlatform = other.gameObject;
+            }
         }
 
         private void OnTriggerEnter([NotNull] Collider other)
