@@ -1,34 +1,36 @@
-﻿using Project.Scripts;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Scroll : MonoBehaviour
+namespace Project.Scripts
 {
-    private GameObject _player;
-
-    private void Start()
+    public class Scroll : MonoBehaviour
     {
-        _player = PlayerController.Player;
-    }
+        private GameObject _player;
 
-    private void FixedUpdate()
-    {
-        const float speed = -0.1f;
-        transform.position += _player.transform.forward * speed;
-
-        var currentPlatform = PlayerController.CurrentPlatform;
-        if (currentPlatform == null) return;
-
-        const float stairSlope = 0.06f;
-        if (currentPlatform.CompareTag("stairsUp"))
+        private void Start()
         {
-            // Stairs are at a 60 degree angle.
-            // For every one step forward, move the "world" 6 steps down.
-            transform.Translate(0, -stairSlope, 0);
+            _player = PlayerController.Player;
         }
-        else if (currentPlatform.CompareTag("stairsDown"))
+
+        private void FixedUpdate()
         {
-            // Same logic as above, just in reverse.
-            transform.Translate(0, stairSlope, 0);
+            const float speed = -0.1f;
+            transform.position += _player.transform.forward * speed;
+
+            var currentPlatform = PlayerController.CurrentPlatform;
+            if (currentPlatform == null) return;
+
+            const float stairSlope = 0.06f;
+            if (currentPlatform.CompareTag("stairsUp"))
+            {
+                // Stairs are at a 60 degree angle.
+                // For every one step forward, move the "world" 6 steps down.
+                transform.Translate(0, -stairSlope, 0);
+            }
+            else if (currentPlatform.CompareTag("stairsDown"))
+            {
+                // Same logic as above, just in reverse.
+                transform.Translate(0, stairSlope, 0);
+            }
         }
     }
 }
