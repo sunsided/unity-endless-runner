@@ -9,15 +9,16 @@ namespace Project.Scripts
     public class Pool : MonoBehaviour
     {
         public static Pool Singleton;
+        public GameObject parentElement;
         public List<Item> items;
-        public List<GameObject> pooledItems = new List<GameObject>();
+        private readonly List<GameObject> _pooledItems = new List<GameObject>();
 
         public GameObject GetRandomItem()
         {
-            pooledItems.Shuffle();
-            for (var i = 0; i < pooledItems.Count; ++i)
+            _pooledItems.Shuffle();
+            for (var i = 0; i < _pooledItems.Count; ++i)
             {
-                var item = pooledItems[i];
+                var item = _pooledItems[i];
                 if (item.activeInHierarchy) continue;
                 return item;
             }
@@ -32,7 +33,14 @@ namespace Project.Scripts
 
         private void Awake()
         {
+            if (Singleton != null)
+            {
+                Destroy(this);
+                return;
+            }
+
             Singleton = this;
+            if (parentElement == null) parentElement = gameObject;
             foreach (var item in items)
             {
                 CreateInactiveAndAddToPool(item.prefab, item.amount);
@@ -41,10 +49,10 @@ namespace Project.Scripts
 
         private void CreateInactiveAndAddToPool([NotNull] GameObject prefab)
         {
-            var obj = Instantiate(prefab);
+            var obj = Instantiate(prefab, parentElement.transform);
             obj.name = prefab.name;
             obj.SetActive(false);
-            pooledItems.Add(obj);
+            _pooledItems.Add(obj);
         }
 
         private void CreateInactiveAndAddToPool([NotNull] GameObject prefab, int count)
@@ -53,11 +61,6 @@ namespace Project.Scripts
             {
                 CreateInactiveAndAddToPool(prefab);
             }
-        }
-
-        private void Start()
-        {
-
         }
 
         [Serializable]
