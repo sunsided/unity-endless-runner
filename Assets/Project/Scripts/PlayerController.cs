@@ -132,6 +132,19 @@ namespace Project.Scripts
             transform.position = new Vector3(_startPosition.x, tf.position.y, _startPosition.z);
         }
 
+        private void CastMagic()
+        {
+            magic.transform.position = magicStartPosition.position;
+            magic.SetActive(true);
+            _magicRb.AddForce(transform.forward * 20, ForceMode.Impulse);
+            Invoke(nameof(KillMagic), 1);
+        }
+
+        private void KillMagic()
+        {
+            magic.SetActive(false);
+        }
+
         [UsedImplicitly]
         private void StopJump()
         {
