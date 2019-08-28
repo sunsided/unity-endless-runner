@@ -1275,6 +1275,7 @@ GameObject:
   - component: {fileID: 3199336009476392483}
   - component: {fileID: 2336545065473774640}
   - component: {fileID: 5989344220345571074}
+  - component: {fileID: 2885029841697225427}
   m_Layer: 0
   m_Name: stairsDown
   m_TagString: stairsDown
@@ -1345,6 +1346,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: aa3d324a3f5434a2488d85d7b3c73aa6, type: 3}
+--- !u!65 &2885029841697225427
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2336545065483167664}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 5, z: 1}
+  m_Center: {x: 0, y: 7, z: -4.5}
 --- !u!1 &2336545065483167666
 GameObject:
   m_ObjectHideFlags: 0

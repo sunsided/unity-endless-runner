@@ -718,6 +718,7 @@ GameObject:
   - component: {fileID: 1168703985513319361}
   - component: {fileID: 8509720255405123406}
   - component: {fileID: 5637387346499936633}
+  - component: {fileID: 1145754056543024605}
   m_Layer: 0
   m_Name: stairsUp
   m_TagString: stairsUp
@@ -788,6 +789,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: aa3d324a3f5434a2488d85d7b3c73aa6, type: 3}
+--- !u!65 &1145754056543024605
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8509720255412507854}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 5, z: 1}
+  m_Center: {x: 0, y: 7, z: -4.5}
 --- !u!1 &8509720255412507856
 GameObject:
   m_ObjectHideFlags: 0
