@@ -13,6 +13,7 @@ namespace Project.Scripts
         private static readonly int IsMagic = Animator.StringToHash("isMagic");
         private Animator _anim;
         private bool _canTurn;
+        private Vector3 _startPosition;
 
         private void Awake()
         {
@@ -21,6 +22,7 @@ namespace Project.Scripts
 
         private void Start()
         {
+            _startPosition = Player.transform.position;
             _anim = GetComponent<Animator>();
             GenerateWorld.RunDummy();
         }
@@ -59,7 +61,7 @@ namespace Project.Scripts
 
         private void Update()
         {
-            var tf = transform;
+            var delayedDummySpawn = false;
 
             var rotateDown = Input.GetButtonDown("Rotate");
             var rotate = Input.GetAxisRaw("Rotate") * (rotateDown ? 1 : 0);
@@ -77,24 +79,36 @@ namespace Project.Scripts
             }
             else if (rotate > 0 && _canTurn)
             {
-                tf.Rotate(Vector3.up * 90);
-                GenerateWorld.DummyTraveller.transform.forward = -tf.forward;
-                GenerateWorld.RunDummy();
+                transform.Rotate(Vector3.up * 90);
+                delayedDummySpawn = true;
             }
             else if (rotate < 0 && _canTurn)
             {
-                tf.Rotate(Vector3.up * -90);
-                GenerateWorld.DummyTraveller.transform.forward = -tf.forward;
-                GenerateWorld.RunDummy();
+                transform.Rotate(Vector3.up * -90);
+                delayedDummySpawn = true;
             }
             else if (shift > 0)
             {
-                tf.Translate(0.5f, 0, 0);
+                transform.Translate(0.5f, 0, 0);
             }
             else if (shift < 0)
             {
-                tf.Translate(-0.5f, 0, 0);
+                transform.Translate(-0.5f, 0, 0);
             }
+
+            if (!delayedDummySpawn) return;
+            var tf = transform;
+            GenerateWorld.DummyTraveller.transform.forward = -tf.forward;
+
+            GenerateWorld.RunDummy();
+
+            // Build more platforms into the future, unless we just generated a T-section
+            if (!GenerateWorld.LastPlatform.CompareTag("platformTSection"))
+            {
+                GenerateWorld.RunDummy();
+            }
+
+            transform.position = new Vector3(_startPosition.x, tf.position.y, _startPosition.z);
         }
 
         [UsedImplicitly]
