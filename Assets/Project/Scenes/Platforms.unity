@@ -165,11 +165,11 @@ MonoBehaviour:
     expandable: 0
   - prefab: {fileID: 8509720255412507854, guid: 3c6f807e1233f89c994e9b32daaa53b0,
       type: 3}
-    amount: 0
+    amount: 2
     expandable: 0
   - prefab: {fileID: 2336545065483167664, guid: 4e448c410344c506f92d9e0136f54198,
       type: 3}
-    amount: 0
+    amount: 2
     expandable: 0
   - prefab: {fileID: 6402460977967691757, guid: 206b2b15facb9454981ea694725fb29b,
       type: 3}
