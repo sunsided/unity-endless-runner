@@ -21,11 +21,17 @@ namespace Project.Scripts
         private void Start()
         {
             _anim = GetComponent<Animator>();
+            GenerateWorld.RunDummy();
         }
 
         private void OnCollisionEnter([NotNull] Collision other)
         {
             CurrentPlatform = other.gameObject;
+        }
+
+        private void OnTriggerEnter([NotNull] Collider other)
+        {
+            GenerateWorld.RunDummy();
         }
 
         private void Update()
