@@ -939,8 +939,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4964707234478878280}
+  - component: {fileID: -5334674010718286276}
   - component: {fileID: 4964707234471346622}
-  - component: {fileID: -6376706560728320503}
+  - component: {fileID: 8691691465415849631}
   m_Layer: 0
   m_Name: platformZSplit
   m_TagString: platformZSplit
@@ -980,6 +981,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5334674010718286276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4964707234478781032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4239fdb2a2ccd90958728b9d8f443763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &4964707234471346622
 Animator:
   serializedVersion: 3
@@ -999,18 +1012,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-6376706560728320503
-MonoBehaviour:
+--- !u!64 &8691691465415849631
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4964707234478781032}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4239fdb2a2ccd90958728b9d8f443763, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 84f9bc7fd110d43cbbcd517cbe9bd72e, type: 3}
 --- !u!1 &4964707234478781034
 GameObject:
   m_ObjectHideFlags: 0
