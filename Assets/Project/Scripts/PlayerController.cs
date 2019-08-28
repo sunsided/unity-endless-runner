@@ -10,12 +10,16 @@ namespace Project.Scripts
         public static bool Dead;
 
         public float jumpForce = 5;
+        public GameObject magic;
+        public Transform magicStartPosition;
 
         private static readonly int IsJumping = Animator.StringToHash("isJumping");
         private static readonly int IsMagic = Animator.StringToHash("isMagic");
         private static readonly int IsDead = Animator.StringToHash("isDead");
+
         private Animator _anim;
         private Rigidbody _rb;
+        private Rigidbody _magicRb;
         private bool _canTurn;
         private Vector3 _startPosition;
 
@@ -29,6 +33,8 @@ namespace Project.Scripts
         private void Start()
         {
             _startPosition = Player.transform.position;
+            _magicRb = magic.GetComponent<Rigidbody>();
+
             GenerateWorld.RunDummy();
         }
 
