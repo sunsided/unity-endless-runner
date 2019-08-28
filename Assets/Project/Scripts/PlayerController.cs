@@ -12,6 +12,7 @@ namespace Project.Scripts
         private static readonly int IsJumping = Animator.StringToHash("isJumping");
         private static readonly int IsMagic = Animator.StringToHash("isMagic");
         private Animator _anim;
+        private bool _canTurn;
 
         private void Awake()
         {
@@ -31,7 +32,25 @@ namespace Project.Scripts
 
         private void OnTriggerEnter([NotNull] Collider other)
         {
-            GenerateWorld.RunDummy();
+            // Boxes mark spawning points, spheres mark turning points.
+            if (other is BoxCollider)
+            {
+                GenerateWorld.RunDummy();
+            }
+            else
+            {
+                _canTurn = true;
+            }
+        }
+
+        private void OnTriggerExit([NotNull] Collider other)
+        {
+            // Spheres mark turning points.
+            // TODO: This means that we can spin forever as long as we're inside the sphere collider. We should deactivate immediately in the Update() method.
+            if (other is SphereCollider)
+            {
+                _canTurn = false;
+            }
         }
 
         private void Update()
@@ -50,11 +69,11 @@ namespace Project.Scripts
             {
                 _anim.SetBool(IsMagic, true);
             }
-            else if (rotate > 0)
+            else if (rotate > 0 && _canTurn)
             {
                 transform.Rotate(Vector3.up * 90);
             }
-            else if (rotate < 0)
+            else if (rotate < 0 && _canTurn)
             {
                 transform.Rotate(Vector3.up * -90);
             }

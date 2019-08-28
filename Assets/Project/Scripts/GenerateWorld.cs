@@ -15,8 +15,14 @@ namespace Project.Scripts
             var player = PlayerController.Player;
             if (LastPlatform != null)
             {
+                var moveDistance = 10;
+                if (LastPlatform.gameObject.CompareTag("platformTSection"))
+                {
+                    moveDistance = 20;
+                }
+
                 DummyTraveller.transform.position = LastPlatform.transform.position +
-                                                    player.transform.forward * 10;
+                                                    player.transform.forward * moveDistance;
 
                 if (LastPlatform.CompareTag("stairsUp"))
                 {
