@@ -54,11 +54,11 @@ namespace Project.Scripts
             }
             else if (shift > 0)
             {
-                transform.Translate(0.1f, 0, 0);
+                transform.Translate(0.5f, 0, 0);
             }
             else if (shift < 0)
             {
-                transform.Translate(-0.1f, 0, 0);
+                transform.Translate(-0.5f, 0, 0);
             }
         }
 
