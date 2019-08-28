@@ -32,12 +32,16 @@ namespace Project.Scripts
 
         private void OnTriggerEnter([NotNull] Collider other)
         {
-            // Boxes mark spawning points, spheres mark turning points.
-            if (other is BoxCollider)
+            // Boxes mark spawning points.
+            // We need to prevent spawning new instances in front of us when exiting into a T-section.
+            // We're handling this special case in the movement (rotation) code.
+            if (other is BoxCollider && !GenerateWorld.LastPlatform.CompareTag("platformTSection"))
             {
                 GenerateWorld.RunDummy();
             }
-            else
+
+            // Spheres mark turning points.
+            if (other is SphereCollider)
             {
                 _canTurn = true;
             }
@@ -55,6 +59,8 @@ namespace Project.Scripts
 
         private void Update()
         {
+            var tf = transform;
+
             var rotateDown = Input.GetButtonDown("Rotate");
             var rotate = Input.GetAxisRaw("Rotate") * (rotateDown ? 1 : 0);
 
@@ -71,19 +77,23 @@ namespace Project.Scripts
             }
             else if (rotate > 0 && _canTurn)
             {
-                transform.Rotate(Vector3.up * 90);
+                tf.Rotate(Vector3.up * 90);
+                GenerateWorld.DummyTraveller.transform.forward = -tf.forward;
+                GenerateWorld.RunDummy();
             }
             else if (rotate < 0 && _canTurn)
             {
-                transform.Rotate(Vector3.up * -90);
+                tf.Rotate(Vector3.up * -90);
+                GenerateWorld.DummyTraveller.transform.forward = -tf.forward;
+                GenerateWorld.RunDummy();
             }
             else if (shift > 0)
             {
-                transform.Translate(0.5f, 0, 0);
+                tf.Translate(0.5f, 0, 0);
             }
             else if (shift < 0)
             {
-                transform.Translate(-0.5f, 0, 0);
+                tf.Translate(-0.5f, 0, 0);
             }
         }
 
