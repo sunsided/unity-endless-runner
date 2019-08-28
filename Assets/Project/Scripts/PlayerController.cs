@@ -74,6 +74,7 @@ namespace Project.Scripts
 
         private void Update()
         {
+            if (Dead) return;
             var delayedDummySpawn = false;
 
             var rotateDown = Input.GetButtonDown("Rotate");
