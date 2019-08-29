@@ -143,6 +143,9 @@ namespace Project.Scripts
         private void KillMagic()
         {
             magic.SetActive(false);
+
+            // Reset spell forces.
+            _magicRb.velocity = Vector3.zero;
         }
 
         [UsedImplicitly]
