@@ -15,6 +15,7 @@ TagManager:
   - Spell
   - MainMenuButton
   - MainMenuSubPanel
+  - GameData
   layers:
   - Default
   - TransparentFX
