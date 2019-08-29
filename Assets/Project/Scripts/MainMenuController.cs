@@ -20,15 +20,12 @@ namespace Project.Scripts
         [ContractAnnotation("=>halt")]
         public void QuitGame() => Application.Quit();
 
-        public void OpenPanel([NotNull] Button button)
+        public void OpenPanel([NotNull] GameObject panel)
         {
-            _openPanel = button.gameObject.transform.GetChild(1).gameObject;
-            OpenPanel(_openPanel);
-            foreach (var b in buttons)
-            {
-                if (b == button.gameObject) continue;
-                b.SetActive(false);
-            }
+            Debug.Log($"Opening panel {panel}");
+            _openPanel = panel;
+            panel.SetActive(true);
+            EnableAllMainButtons(false);
         }
 
         public void ClosePanel([NotNull] Button button)
@@ -38,12 +35,6 @@ namespace Project.Scripts
             _openPanel = null;
             ClosePanel(panel);
             EnableAllMainButtons();
-        }
-
-        private static void OpenPanel([NotNull] GameObject panel)
-        {
-            Debug.Log($"Opening panel {panel}");
-            panel.SetActive(true);
         }
 
         private static void ClosePanel([NotNull] GameObject panel)
