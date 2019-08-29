@@ -11,7 +11,7 @@ namespace Project.Scripts
             if (!other.gameObject.CompareTag("Player")) return;
             Debug.Log("Coin picked up.");
 
-            GameData.singleton.score += value;
+            GameData.Singleton.AddScore(value);
             Destroy(gameObject, 0.5f);
         }
     }

@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Project.Scripts
 {
     public class GameData : MonoBehaviour
     {
-        public static GameData singleton;
+        public static GameData Singleton;
 
-        public int score;
+        public Text scoreText;
+        private int _score;
 
         private void Awake()
         {
@@ -21,7 +24,19 @@ namespace Project.Scripts
             }
 
             DontDestroyOnLoad(gameObject);
-            singleton = this;
+            Singleton = this;
+        }
+
+        public void AddScore(int value)
+        {
+            _score += value;
+            UpdateScore();
+        }
+
+        public void UpdateScore()
+        {
+            if (scoreText == null) return;
+            scoreText.text = $"Score: {_score}";
         }
     }
 }
