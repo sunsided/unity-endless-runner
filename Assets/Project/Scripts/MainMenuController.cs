@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Project.Scripts
 {
@@ -20,15 +21,11 @@ namespace Project.Scripts
 
         public void ShowHelpPanel() => OpenPanel(helpPanel);
 
-        public void CloseHelpPanel() => ClosePanel(helpPanel);
-
         public void ShowOptionsPanel() => OpenPanel(optionsPanel);
-
-        public void CloseOptionsPanel() => ClosePanel(optionsPanel);
 
         public void ShowStatisticsPanel() => OpenPanel(statisticsPanel);
 
-        public void CloseStatisticsPanel() => ClosePanel(statisticsPanel);
+        public void ClosePanel([NotNull] Button button) => button.gameObject.transform.parent.gameObject.SetActive(false);
 
         private static void OpenPanel([NotNull] GameObject panel) => panel.SetActive(true);
 
@@ -36,9 +33,9 @@ namespace Project.Scripts
 
         private void Start()
         {
-            CloseHelpPanel();
-            CloseOptionsPanel();
-            CloseStatisticsPanel();
+            ClosePanel(helpPanel);
+            ClosePanel(optionsPanel);
+            ClosePanel(statisticsPanel);
         }
 
         private void Update()
@@ -50,15 +47,15 @@ namespace Project.Scripts
         {
             if (helpPanel.activeSelf)
             {
-                CloseHelpPanel();
+                ClosePanel(helpPanel);
             }
             else if (optionsPanel.activeSelf)
             {
-                CloseOptionsPanel();
+                ClosePanel(optionsPanel);
             }
             else if (statisticsPanel.activeSelf)
             {
-                CloseStatisticsPanel();
+                ClosePanel(statisticsPanel);
             }
             else
             {
