@@ -7,9 +7,10 @@ namespace Project.Scripts
 {
     public class MainMenuController : MonoBehaviour
     {
-        public GameObject helpPanel;
-        public GameObject optionsPanel;
-        public GameObject statisticsPanel;
+        public GameObject[] panels;
+        public GameObject[] buttons;
+
+        private GameObject _openPanel;
 
         public void LoadGameScene()
         {
@@ -19,23 +20,50 @@ namespace Project.Scripts
         [ContractAnnotation("=>halt")]
         public void QuitGame() => Application.Quit();
 
-        public void ShowHelpPanel() => OpenPanel(helpPanel);
+        public void OpenPanel([NotNull] Button button)
+        {
+            _openPanel = button.gameObject.transform.GetChild(1).gameObject;
+            OpenPanel(_openPanel);
+            foreach (var b in buttons)
+            {
+                if (b == button.gameObject) continue;
+                b.SetActive(false);
+            }
+        }
 
-        public void ShowOptionsPanel() => OpenPanel(optionsPanel);
+        public void ClosePanel([NotNull] Button button)
+        {
+            var panel = button.gameObject.transform.parent.gameObject;
+            Debug.Assert(panel == _openPanel, "panel == _openPanel");
+            _openPanel = null;
+            ClosePanel(panel);
+            EnableAllMainButtons();
+        }
 
-        public void ShowStatisticsPanel() => OpenPanel(statisticsPanel);
+        private static void OpenPanel([NotNull] GameObject panel)
+        {
+            Debug.Log($"Opening panel {panel}");
+            panel.SetActive(true);
+        }
 
-        public void ClosePanel([NotNull] Button button) => button.gameObject.transform.parent.gameObject.SetActive(false);
-
-        private static void OpenPanel([NotNull] GameObject panel) => panel.SetActive(true);
-
-        private static void ClosePanel([NotNull] GameObject panel) => panel.SetActive(false);
+        private static void ClosePanel([NotNull] GameObject panel)
+        {
+            Debug.Log($"Closing panel {panel}");
+            panel.SetActive(false);
+        }
 
         private void Start()
         {
-            ClosePanel(helpPanel);
-            ClosePanel(optionsPanel);
-            ClosePanel(statisticsPanel);
+            buttons = GameObject.FindGameObjectsWithTag("MainMenuButton");
+            panels = GameObject.FindGameObjectsWithTag("MainMenuSubPanel");
+            Debug.Log($"Found {panels.Length} panels and {buttons.Length} buttons.");
+
+            foreach (var panel in panels)
+            {
+                ClosePanel(panel);
+            }
+
+            EnableAllMainButtons();
         }
 
         private void Update()
@@ -45,21 +73,22 @@ namespace Project.Scripts
 
         private void HandleCancelButton()
         {
-            if (helpPanel.activeSelf)
+            if (_openPanel != null && _openPanel.activeSelf)
             {
-                ClosePanel(helpPanel);
-            }
-            else if (optionsPanel.activeSelf)
-            {
-                ClosePanel(optionsPanel);
-            }
-            else if (statisticsPanel.activeSelf)
-            {
-                ClosePanel(statisticsPanel);
+                ClosePanel(_openPanel);
+                EnableAllMainButtons();
             }
             else
             {
                 QuitGame();
+            }
+        }
+
+        private void EnableAllMainButtons(bool enabled = true)
+        {
+            foreach (var b in buttons)
+            {
+                b.SetActive(enabled);
             }
         }
     }
