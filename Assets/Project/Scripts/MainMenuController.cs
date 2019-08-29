@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using JetBrains.Annotations;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Project.Scripts
@@ -10,9 +12,15 @@ namespace Project.Scripts
             SceneManager.LoadScene("ScrollingWorld", LoadSceneMode.Single);
         }
 
+        [ContractAnnotation("=>halt")]
         public void QuitGame()
         {
             Application.Quit();
+        }
+
+        private void Update()
+        {
+            if (Input.GetButtonDown("Cancel")) QuitGame();
         }
     }
 }
