@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Project.Scripts
@@ -7,18 +8,33 @@ namespace Project.Scripts
     {
         public GameObject[] bricks;
         private readonly List<Rigidbody> _bricksRbs = new List<Rigidbody>();
+        private readonly List<Vector3> _bricksPositions = new List<Vector3>();
+        private readonly List<Quaternion> _bricksRolations = new List<Quaternion>();
         private Collider _collider;
 
         private void Awake()
         {
             _collider = GetComponent<Collider>();
-        }
-
-        private void Start()
-        {
             foreach (var brick in bricks)
             {
                 _bricksRbs.Add(brick.GetComponent<Rigidbody>());
+                _bricksPositions.Add(brick.transform.localPosition);
+                _bricksRolations.Add(brick.transform.rotation);
+            }
+        }
+
+        private void OnEnable()
+        {
+            // Re-enable dying collision.
+            _collider.enabled = true;
+
+            // Reset all the bricks.
+            for (var index = 0; index < bricks.Length; index++)
+            {
+                var brick = bricks[index];
+                _bricksRbs[index].isKinematic = true;
+                brick.transform.localPosition = _bricksPositions[index];
+                brick.transform.rotation = _bricksRolations[index];
             }
         }
 
