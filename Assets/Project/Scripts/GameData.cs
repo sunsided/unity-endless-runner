@@ -9,7 +9,9 @@ namespace Project.Scripts
         public static GameData Singleton;
 
         public Text scoreText;
+        public Text highscoreText;
         private int _score;
+        private int _highScore;
 
         private void Awake()
         {
@@ -42,11 +44,14 @@ namespace Project.Scripts
         {
             if (!PlayerPrefs.HasKey("highscore"))
             {
-                PlayerPrefs.SetInt("highscore", 0);
+                _highScore = 0;
+                PlayerPrefs.SetInt("highscore", _highScore);
                 return;
             }
-            var hs = PlayerPrefs.GetInt("highscore");
-            PlayerPrefs.SetInt("highscore", Math.Max(hs, _score));
+
+            var oldHighscore = PlayerPrefs.GetInt("highscore");
+            _highScore = Math.Max(oldHighscore, _score);
+            PlayerPrefs.SetInt("highscore", _highScore);
         }
 
         public void ResetScore()
@@ -58,8 +63,15 @@ namespace Project.Scripts
 
         private void UpdateScoreDisplay()
         {
-            if (scoreText == null) return;
-            scoreText.text = $"Score: {_score}";
+            if (scoreText != null)
+            {
+                scoreText.text = $"Score: {_score}";
+            }
+
+            if (highscoreText != null)
+            {
+                highscoreText.text = $"Highscore: {_highScore}";
+            }
         }
     }
 }
