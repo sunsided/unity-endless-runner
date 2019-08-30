@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Project.Scripts
 {
@@ -14,6 +15,10 @@ namespace Project.Scripts
         public GameObject magic;
         public Transform magicStartPosition;
 
+        public Texture aliveIcon;
+        public Texture deadIcon;
+        public RawImage[] icons;
+
         private static readonly int IsJumping = Animator.StringToHash("isJumping");
         private static readonly int IsMagic = Animator.StringToHash("isMagic");
         private static readonly int IsDead = Animator.StringToHash("isDead");
@@ -23,6 +28,7 @@ namespace Project.Scripts
         private Rigidbody _magicRb;
         private bool _canTurn;
         private Vector3 _startPosition;
+        private int _livesLeft;
 
         private void Awake()
         {
@@ -33,11 +39,21 @@ namespace Project.Scripts
 
         private void Start()
         {
-            Dead = false;
             _startPosition = Player.transform.position;
             _magicRb = magic.GetComponent<Rigidbody>();
 
             GenerateWorld.RunDummy();
+
+            Dead = false;
+            _livesLeft = PlayerPrefs.GetInt("lives");
+
+            for (var i = 0; i < icons.Length; ++i)
+            {
+                if (i >= _livesLeft)
+                {
+                    icons[i].texture = deadIcon;
+                }
+            }
         }
 
         private void OnCollisionEnter([NotNull] Collision other)
@@ -46,6 +62,9 @@ namespace Project.Scripts
             {
                 _anim.SetTrigger(IsDead);
                 Dead = true;
+
+                --_livesLeft;
+                PlayerPrefs.SetInt("lives", _livesLeft);
 
                 Invoke(nameof(RestartGame), 1);
             }

@@ -1476,6 +1476,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1664087764, guid: 528f58805458038209b9cba55fed765b, type: 3}
+      propertyPath: icons.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664087764, guid: 528f58805458038209b9cba55fed765b, type: 3}
       propertyPath: magic
       value: 
       objectReference: {fileID: 1789334657}
@@ -1483,6 +1487,26 @@ PrefabInstance:
       propertyPath: magicStartPosition
       value: 
       objectReference: {fileID: 969439156}
+    - target: {fileID: 1664087764, guid: 528f58805458038209b9cba55fed765b, type: 3}
+      propertyPath: aliveIcon
+      value: 
+      objectReference: {fileID: 2800000, guid: 71492fa8240199ec198e4f91530f720d, type: 3}
+    - target: {fileID: 1664087764, guid: 528f58805458038209b9cba55fed765b, type: 3}
+      propertyPath: deadIcon
+      value: 
+      objectReference: {fileID: 2800000, guid: a049b6ec5869678cabf587678dfa1399, type: 3}
+    - target: {fileID: 1664087764, guid: 528f58805458038209b9cba55fed765b, type: 3}
+      propertyPath: icons.Array.data[0]
+      value: 
+      objectReference: {fileID: 288294619}
+    - target: {fileID: 1664087764, guid: 528f58805458038209b9cba55fed765b, type: 3}
+      propertyPath: icons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1244117974}
+    - target: {fileID: 1664087764, guid: 528f58805458038209b9cba55fed765b, type: 3}
+      propertyPath: icons.Array.data[2]
+      value: 
+      objectReference: {fileID: 2039355895}
     - target: {fileID: 1301420288905790293, guid: 528f58805458038209b9cba55fed765b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

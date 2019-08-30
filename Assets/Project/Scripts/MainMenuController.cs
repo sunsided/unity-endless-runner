@@ -12,8 +12,11 @@ namespace Project.Scripts
 
         private GameObject _openPanel;
 
+        private int _maxLives = 3;
+
         public void LoadGameScene()
         {
+            PlayerPrefs.SetInt("lives", _maxLives);
             SceneManager.LoadScene("ScrollingWorld", LoadSceneMode.Single);
         }
 
