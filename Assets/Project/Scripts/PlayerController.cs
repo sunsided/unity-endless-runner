@@ -66,7 +66,9 @@ namespace Project.Scripts
 
         private void OnCollisionEnter([NotNull] Collision other)
         {
-            if (other.gameObject.CompareTag("Fire") || other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("OuterSpace"))
+            var isLifeThreat = other.gameObject.CompareTag("Fire") || other.gameObject.CompareTag("Wall") ||
+                               other.gameObject.CompareTag("OuterSpace");
+            if (isLifeThreat && !Dead)
             {
                 _anim.SetTrigger(IsDead);
                 Dead = true;
