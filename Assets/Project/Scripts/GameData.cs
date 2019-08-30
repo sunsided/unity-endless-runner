@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Project.Scripts
@@ -32,7 +33,20 @@ namespace Project.Scripts
         {
             _score += value;
             PlayerPrefs.SetInt("score", _score);
+            PlayerPrefs.SetInt("lastScore", _score);
             UpdateScoreDisplay();
+            UpdateHighscore();
+        }
+
+        private void UpdateHighscore()
+        {
+            if (!PlayerPrefs.HasKey("highscore"))
+            {
+                PlayerPrefs.SetInt("highscore", 0);
+                return;
+            }
+            var hs = PlayerPrefs.GetInt("highscore");
+            PlayerPrefs.SetInt("highscore", Math.Max(hs, _score));
         }
 
         public void ResetScore()
