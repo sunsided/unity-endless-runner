@@ -19,6 +19,8 @@ namespace Project.Scripts
         public Texture deadIcon;
         public RawImage[] icons;
 
+        public GameObject gameOverPanel;
+
         private static readonly int IsJumping = Animator.StringToHash("isJumping");
         private static readonly int IsMagic = Animator.StringToHash("isMagic");
         private static readonly int IsDead = Animator.StringToHash("isDead");
@@ -47,6 +49,12 @@ namespace Project.Scripts
             Dead = false;
             _livesLeft = PlayerPrefs.GetInt("lives");
 
+            UpdateLivesLeftUI();
+        }
+
+        // ReSharper disable once InconsistentNaming
+        private void UpdateLivesLeftUI()
+        {
             for (var i = 0; i < icons.Length; ++i)
             {
                 if (i >= _livesLeft)
@@ -65,8 +73,16 @@ namespace Project.Scripts
 
                 --_livesLeft;
                 PlayerPrefs.SetInt("lives", _livesLeft);
+                UpdateLivesLeftUI();
 
-                Invoke(nameof(RestartGame), 1);
+                if (_livesLeft > 0)
+                {
+                    Invoke(nameof(RestartGame), 1);
+                }
+                else
+                {
+                    gameOverPanel.SetActive(true);
+                }
             }
             else
             {

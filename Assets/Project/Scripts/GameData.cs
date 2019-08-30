@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Project.Scripts
@@ -33,7 +32,18 @@ namespace Project.Scripts
         {
             _score += value;
             PlayerPrefs.SetInt("score", _score);
+            UpdateScoreDisplay();
+        }
 
+        public void ResetScore()
+        {
+            _score = 0;
+            PlayerPrefs.SetInt("score", 0);
+            UpdateScoreDisplay();
+        }
+
+        private void UpdateScoreDisplay()
+        {
             if (scoreText == null) return;
             scoreText.text = $"Score: {_score}";
         }
