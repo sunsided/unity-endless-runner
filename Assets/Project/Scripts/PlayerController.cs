@@ -42,7 +42,7 @@ namespace Project.Scripts
 
         private void OnCollisionEnter([NotNull] Collision other)
         {
-            if (other.gameObject.CompareTag("Fire") || other.gameObject.CompareTag("Wall"))
+            if (other.gameObject.CompareTag("Fire") || other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("OuterSpace"))
             {
                 _anim.SetTrigger(IsDead);
                 Dead = true;

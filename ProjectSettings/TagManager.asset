@@ -16,6 +16,7 @@ TagManager:
   - MainMenuButton
   - MainMenuSubPanel
   - GameData
+  - OuterSpace
   layers:
   - Default
   - TransparentFX
