@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Project.Scripts
 {
@@ -32,6 +33,7 @@ namespace Project.Scripts
 
         private void Start()
         {
+            Dead = false;
             _startPosition = Player.transform.position;
             _magicRb = magic.GetComponent<Rigidbody>();
 
@@ -44,6 +46,8 @@ namespace Project.Scripts
             {
                 _anim.SetTrigger(IsDead);
                 Dead = true;
+
+                Invoke(nameof(RestartGame), 1);
             }
             else
             {
@@ -132,6 +136,12 @@ namespace Project.Scripts
             transform.position = new Vector3(_startPosition.x, tf.position.y, _startPosition.z);
         }
 
+        private void RestartGame()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        }
+
+        [UsedImplicitly]
         private void CastMagic()
         {
             magic.transform.position = magicStartPosition.position;
