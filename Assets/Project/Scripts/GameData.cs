@@ -25,16 +25,15 @@ namespace Project.Scripts
 
             DontDestroyOnLoad(gameObject);
             Singleton = this;
+
+            PlayerPrefs.SetInt("score", 0);
         }
 
         public void AddScore(int value)
         {
             _score += value;
-            UpdateScore();
-        }
+            PlayerPrefs.SetInt("score", _score);
 
-        public void UpdateScore()
-        {
             if (scoreText == null) return;
             scoreText.text = $"Score: {_score}";
         }

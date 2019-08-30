@@ -9,7 +9,7 @@ namespace Project.Scripts
         {
             if (GameData.Singleton == null) return;
             GameData.Singleton.scoreText = GetComponent<Text>();
-            GameData.Singleton.UpdateScore();
+            GameData.Singleton.AddScore(0);
         }
     }
 }
