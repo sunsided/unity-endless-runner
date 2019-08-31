@@ -24,6 +24,7 @@ namespace Project.Scripts
         private static readonly int IsJumping = Animator.StringToHash("isJumping");
         private static readonly int IsMagic = Animator.StringToHash("isMagic");
         private static readonly int IsDead = Animator.StringToHash("isDead");
+        private static readonly int IsFalling = Animator.StringToHash("isFalling");
 
         private Animator _anim;
         private Rigidbody _rb;
@@ -31,6 +32,7 @@ namespace Project.Scripts
         private bool _canTurn;
         private Vector3 _startPosition;
         private int _livesLeft;
+        private bool _falling;
 
         private void Awake()
         {
@@ -64,14 +66,17 @@ namespace Project.Scripts
             }
         }
 
-        private void OnCollisionEnter([NotNull] Collision other)
+        private void OnCollisionEnter([CanBeNull] Collision other)
         {
-            var isLifeThreat = other.gameObject.CompareTag("Fire") || other.gameObject.CompareTag("Wall") ||
-                               other.gameObject.CompareTag("OuterSpace");
+            var isDangerousCollision = other != null && (other.gameObject.CompareTag("Fire") ||
+                                                         other.gameObject.CompareTag("Wall") ||
+                                                         other.gameObject.CompareTag("OuterSpace"));
+            var isLifeThreat = _falling || isDangerousCollision;
             if (isLifeThreat && !Dead)
             {
+                _anim.SetTrigger(_falling ? IsFalling : IsDead);
+
                 Dead = true;
-                _anim.SetTrigger(IsDead);
                 GameData.Singleton.SoundDying.Play();
 
                 --_livesLeft;
@@ -80,7 +85,7 @@ namespace Project.Scripts
 
                 if (_livesLeft > 0)
                 {
-                    Invoke(nameof(RestartGame), 1);
+                    Invoke(nameof(RestartGame), 2);
                 }
                 else
                 {
@@ -89,7 +94,7 @@ namespace Project.Scripts
             }
             else
             {
-                CurrentPlatform = other.gameObject;
+                if (other != null) CurrentPlatform = other.gameObject;
             }
         }
 
@@ -123,7 +128,22 @@ namespace Project.Scripts
         private void Update()
         {
             if (Dead) return;
-            var delayedDummySpawn = false;
+
+            if (CurrentPlatform != null)
+            {
+                if (transform.position.y < CurrentPlatform.transform.position.y)
+                {
+                    _falling = true;
+                }
+
+                const float fallingDistance = 5f;
+                if (transform.position.y < CurrentPlatform.transform.position.y - fallingDistance)
+                {
+                    // Trigger the restarting and everything.
+                    OnCollisionEnter(null);
+                    return;
+                }
+            }
 
             var rotateDown = Input.GetButtonDown("Rotate");
             var rotate = Input.GetAxisRaw("Rotate") * (rotateDown ? 1 : 0);
@@ -131,6 +151,7 @@ namespace Project.Scripts
             var shiftDown = Input.GetButtonDown("Horizontal");
             var shift = Input.GetAxisRaw("Horizontal") * (shiftDown ? 1 : 0);
 
+            var delayedDummySpawn = false;
             if (Input.GetButtonDown("Jump"))
             {
                 _anim.SetBool(IsJumping, true);
