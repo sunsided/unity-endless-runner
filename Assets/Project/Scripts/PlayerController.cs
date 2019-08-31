@@ -70,8 +70,9 @@ namespace Project.Scripts
                                other.gameObject.CompareTag("OuterSpace");
             if (isLifeThreat && !Dead)
             {
-                _anim.SetTrigger(IsDead);
                 Dead = true;
+                _anim.SetTrigger(IsDead);
+                GameData.Singleton.SoundDying.Play();
 
                 --_livesLeft;
                 PlayerPrefs.SetInt(PlayerPrefKeys.Lives, _livesLeft);
@@ -133,6 +134,7 @@ namespace Project.Scripts
             if (Input.GetButtonDown("Jump"))
             {
                 _anim.SetBool(IsJumping, true);
+                GameData.Singleton.SoundJump.Play();
                 _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
             else if (Input.GetButtonDown("Fire1"))

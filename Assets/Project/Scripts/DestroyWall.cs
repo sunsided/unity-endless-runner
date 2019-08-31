@@ -50,6 +50,8 @@ namespace Project.Scripts
         {
             if (!other.gameObject.CompareTag("Spell")) return;
 
+            GameData.Singleton.SoundExplosion.Play();
+
             // Spawn and kill explosion particle system.
             var spellPosition = other.contacts[0].point;
             var explosion = Instantiate(explosionPrefab, spellPosition, Quaternion.identity, transform);
