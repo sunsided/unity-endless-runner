@@ -15,6 +15,7 @@ namespace Project.Scripts
         public Material regularMaterial;
         public Material highValueMaterial;
         public GameObject scorePrefab;
+        public GameObject particlesPrefab;
 
         private bool _isBigCoin;
         private int _score;
@@ -43,13 +44,23 @@ namespace Project.Scripts
         private void OnTriggerEnter([NotNull] Collider other)
         {
             if (!other.gameObject.CompareTag("Player")) return;
+            var position = transform.position;
 
             GameData.Singleton.SoundPickup.Play();
             GameData.Singleton.AddScore(_score);
 
+            // Add particles.
+            var pe = Instantiate(particlesPrefab, position, Quaternion.identity, transform);
+            Destroy(pe, 2.5f); // TODO: Destroy after particles are finished
+
             // Show the score text float.
-            var scoreText = Instantiate(scorePrefab, _canvas.transform);
+            // TODO: The score doesn't seem to be positioned exactly over the coin.
+            var scoreText = Instantiate(scorePrefab, _canvas.transform, true);
             scoreText.GetComponent<Text>().text = _score.ToString();
+
+            Debug.Assert(Camera.main != null, "Camera.main != null");
+            var screenPoint = Camera.main.WorldToScreenPoint(position);
+            scoreText.transform.position = screenPoint;
 
             // Instead of destroying the coin, just hide it.
             for (var i = 0; i < _renderers.Length; ++i)

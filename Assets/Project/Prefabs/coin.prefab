@@ -382,6 +382,8 @@ MonoBehaviour:
   highValueMaterial: {fileID: 2100000, guid: 117da65c9cf6d0921adf04705b24c1fa, type: 2}
   scorePrefab: {fileID: 1001647863531275209, guid: 75ca583f413db310389679f7d4960d3d,
     type: 3}
+  particlesPrefab: {fileID: 365265467015159313, guid: 0fd16b879f7147ce8ac2be374cc42fe2,
+    type: 3}
 --- !u!1 &9097946021071646753
 GameObject:
   m_ObjectHideFlags: 0

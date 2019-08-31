@@ -203,6 +203,22 @@ MonoBehaviour:
       type: 3}
     amount: 2
     expandable: 0
+  - prefab: {fileID: 4983740478749892208, guid: e231954d9003315298226df250775e75,
+      type: 3}
+    amount: 2
+    expandable: 0
+  - prefab: {fileID: 4983740478749892208, guid: a2e2a061a151184559b8dfa1cd9deeb2,
+      type: 3}
+    amount: 2
+    expandable: 0
+  - prefab: {fileID: 4983740478749892208, guid: c45ea3de8580422b1bb2534538554ad2,
+      type: 3}
+    amount: 2
+    expandable: 0
+  - prefab: {fileID: 8509720255412507854, guid: a36a024ee26cac5a480a6f2a6b0dccb1,
+      type: 3}
+    amount: 2
+    expandable: 0
 --- !u!4 &69372094
 Transform:
   m_ObjectHideFlags: 0
