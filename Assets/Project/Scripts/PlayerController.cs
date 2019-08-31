@@ -132,7 +132,8 @@ namespace Project.Scripts
             if (CurrentPlatform != null)
             {
                 // Make the player appear falling immediately.
-                if (transform.position.y < CurrentPlatform.transform.position.y)
+                const float shortFallingDistance = 2f;
+                if (transform.position.y < CurrentPlatform.transform.position.y - shortFallingDistance)
                 {
                     _anim.SetTrigger(IsFalling);
                 }
