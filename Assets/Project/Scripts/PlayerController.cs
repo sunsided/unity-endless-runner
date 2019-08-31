@@ -144,11 +144,13 @@ namespace Project.Scripts
             else if (rotate > 0 && _canTurn)
             {
                 transform.Rotate(Vector3.up * 90);
+                GameData.Singleton.SoundWhoosh.Play();
                 delayedDummySpawn = true;
             }
             else if (rotate < 0 && _canTurn)
             {
                 transform.Rotate(Vector3.up * -90);
+                GameData.Singleton.SoundWhoosh.Play();
                 delayedDummySpawn = true;
             }
             else if (shift > 0)
