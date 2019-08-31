@@ -131,14 +131,17 @@ namespace Project.Scripts
 
             if (CurrentPlatform != null)
             {
+                // Make the player appear falling immediately.
                 if (transform.position.y < CurrentPlatform.transform.position.y)
                 {
-                    _falling = true;
+                    _anim.SetTrigger(IsFalling);
                 }
 
-                const float fallingDistance = 5f;
+                const float fallingDistance = 10f;
                 if (transform.position.y < CurrentPlatform.transform.position.y - fallingDistance)
                 {
+                    _falling = true;
+
                     // Trigger the restarting and everything.
                     OnCollisionEnter(null);
                     return;
