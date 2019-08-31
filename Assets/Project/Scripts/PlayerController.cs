@@ -183,6 +183,7 @@ namespace Project.Scripts
         [UsedImplicitly]
         private void CastMagic()
         {
+            GameData.Singleton.SoundCastMagic.Play();
             magic.transform.position = magicStartPosition.position;
             magic.SetActive(true);
             _magicRb.AddForce(transform.forward * 20, ForceMode.Impulse);
