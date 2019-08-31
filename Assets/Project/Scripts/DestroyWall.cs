@@ -38,6 +38,12 @@ namespace Project.Scripts
                 brick.transform.localPosition = _bricksPositions[index];
                 brick.transform.rotation = _bricksRolations[index];
             }
+
+            // Remove all existing explosions
+            foreach (var ps in GetComponentsInChildren<ParticleSystem>())
+            {
+                Destroy(ps.gameObject);
+            }
         }
 
         private void OnCollisionEnter([NotNull] Collision other)
