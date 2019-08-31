@@ -16,7 +16,7 @@ namespace Project.Scripts
 
         public void LoadGameScene()
         {
-            PlayerPrefs.SetInt("lives", _maxLives);
+            PlayerPrefs.SetInt(PlayerPrefKeys.Lives, _maxLives);
             GameData.Singleton.ResetScore();
             SceneManager.LoadScene("ScrollingWorld", LoadSceneMode.Single);
         }

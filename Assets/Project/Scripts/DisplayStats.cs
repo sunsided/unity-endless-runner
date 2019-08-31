@@ -10,18 +10,18 @@ namespace Project.Scripts
 
         private void OnEnable()
         {
-            if (PlayerPrefs.HasKey("lastScore"))
+            if (PlayerPrefs.HasKey(PlayerPrefKeys.LastScore))
             {
-                lastScore.text = $"Last score: {PlayerPrefs.GetInt("lastScore")}";
+                lastScore.text = $"Last score: {PlayerPrefs.GetInt(PlayerPrefKeys.LastScore)}";
             }
             else
             {
                 lastScore.text = "Last score: 0";
             }
 
-            if (PlayerPrefs.HasKey("highscore"))
+            if (PlayerPrefs.HasKey(PlayerPrefKeys.Highscore))
             {
-                highestScore.text = $"Highest score: {PlayerPrefs.GetInt("highscore")}";
+                highestScore.text = $"Highest score: {PlayerPrefs.GetInt(PlayerPrefKeys.Highscore)}";
             }
             else
             {

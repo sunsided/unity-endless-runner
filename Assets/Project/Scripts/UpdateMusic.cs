@@ -22,9 +22,9 @@ namespace Project.Scripts
             _music.Add(audioSources[0]);
 
 
-            if (PlayerPrefs.HasKey("musicVolume"))
+            if (PlayerPrefs.HasKey(PlayerPrefKeys.MusicVolume))
             {
-                var storedValue = PlayerPrefs.GetFloat("musicVolume");
+                var storedValue = PlayerPrefs.GetFloat(PlayerPrefKeys.MusicVolume);
                 _slider.value = storedValue;
                 UpdateMusicVolume(storedValue);
             }
@@ -39,7 +39,7 @@ namespace Project.Scripts
 
         private void UpdateMusicVolume(float volume)
         {
-            PlayerPrefs.SetFloat("musicVolume", volume);
+            PlayerPrefs.SetFloat(PlayerPrefKeys.MusicVolume, volume);
             foreach (var source in _music)
             {
                 source.volume = volume;

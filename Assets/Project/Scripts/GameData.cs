@@ -28,36 +28,36 @@ namespace Project.Scripts
             DontDestroyOnLoad(gameObject);
             Singleton = this;
 
-            PlayerPrefs.SetInt("score", 0);
+            PlayerPrefs.SetInt(PlayerPrefKeys.Score, 0);
         }
 
         public void AddScore(int value)
         {
             _score += value;
-            PlayerPrefs.SetInt("score", _score);
-            PlayerPrefs.SetInt("lastScore", _score);
+            PlayerPrefs.SetInt(PlayerPrefKeys.Score, _score);
+            PlayerPrefs.SetInt(PlayerPrefKeys.LastScore, _score);
             UpdateScoreDisplay();
             UpdateHighscore();
         }
 
         private void UpdateHighscore()
         {
-            if (!PlayerPrefs.HasKey("highscore"))
+            if (!PlayerPrefs.HasKey(PlayerPrefKeys.Highscore))
             {
                 _highScore = 0;
-                PlayerPrefs.SetInt("highscore", _highScore);
+                PlayerPrefs.SetInt(PlayerPrefKeys.Highscore, _highScore);
                 return;
             }
 
-            var oldHighscore = PlayerPrefs.GetInt("highscore");
+            var oldHighscore = PlayerPrefs.GetInt(PlayerPrefKeys.Highscore);
             _highScore = Math.Max(oldHighscore, _score);
-            PlayerPrefs.SetInt("highscore", _highScore);
+            PlayerPrefs.SetInt(PlayerPrefKeys.Highscore, _highScore);
         }
 
         public void ResetScore()
         {
             _score = 0;
-            PlayerPrefs.SetInt("score", 0);
+            PlayerPrefs.SetInt(PlayerPrefKeys.Score, 0);
             UpdateScoreDisplay();
         }
 

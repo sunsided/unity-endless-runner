@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 
 namespace Project.Scripts
 {
@@ -22,7 +23,7 @@ namespace Project.Scripts
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter([NotNull] Collider other)
         {
             if (!other.gameObject.CompareTag("Player")) return;
             Debug.Log("Coin picked up.");

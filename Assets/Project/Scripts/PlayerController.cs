@@ -47,7 +47,7 @@ namespace Project.Scripts
             GenerateWorld.RunDummy();
 
             Dead = false;
-            _livesLeft = PlayerPrefs.GetInt("lives");
+            _livesLeft = PlayerPrefs.GetInt(PlayerPrefKeys.Lives);
 
             UpdateLivesLeftUI();
         }
@@ -74,7 +74,7 @@ namespace Project.Scripts
                 Dead = true;
 
                 --_livesLeft;
-                PlayerPrefs.SetInt("lives", _livesLeft);
+                PlayerPrefs.SetInt(PlayerPrefKeys.Lives, _livesLeft);
                 UpdateLivesLeftUI();
 
                 if (_livesLeft > 0)
