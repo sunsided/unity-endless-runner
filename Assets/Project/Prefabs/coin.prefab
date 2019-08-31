@@ -375,6 +375,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79180bb189e008f829604db14dacb54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highValueProbability: 50
+  value: 10
+  highValue: 50
+  regularMaterial: {fileID: 2100000, guid: aeb7463d3797248fe9af6050b5b5827f, type: 2}
+  highValueMaterial: {fileID: 2100000, guid: 117da65c9cf6d0921adf04705b24c1fa, type: 2}
+  scorePrefab: {fileID: 1001647863531275209, guid: 75ca583f413db310389679f7d4960d3d,
+    type: 3}
 --- !u!1 &9097946021071646753
 GameObject:
   m_ObjectHideFlags: 0
