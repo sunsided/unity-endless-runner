@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,30 @@ namespace Project.Scripts
 
         private int _score;
         private int _highScore;
+
+        [NotNull]
+        public AudioSource SoundPickup => _sfx[0];
+
+        [NotNull]
+        public AudioSource SoundJump => _sfx[1];
+
+        [NotNull]
+        public AudioSource SoundFootstep2 => _sfx[2];
+
+        [NotNull]
+        public AudioSource SoundFootstep1 => _sfx[3];
+
+        [NotNull]
+        public AudioSource SoundExplosion => _sfx[4];
+
+        [NotNull]
+        public AudioSource SoundDying => _sfx[5];
+
+        [NotNull]
+        public AudioSource SoundCastMagic => _sfx[6];
+
+        [NotNull]
+        public AudioSource SoundWhoosh => _sfx[7];
 
         public void AddScore(int value)
         {

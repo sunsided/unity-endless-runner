@@ -26,7 +26,7 @@ namespace Project.Scripts
         private void OnTriggerEnter([NotNull] Collider other)
         {
             if (!other.gameObject.CompareTag("Player")) return;
-            Debug.Log("Coin picked up.");
+            GameData.Singleton.SoundPickup.Play();
 
             GameData.Singleton.AddScore(value);
 
