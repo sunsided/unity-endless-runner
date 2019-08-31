@@ -29,7 +29,8 @@ This project uses:
 - Object pooling,
 - The animation system with blended animations,
 - Animation triggers (shooting magic, footstep sounds, ...),
-- A bunch of particle systems
+- A bunch of particle systems,
+- Overlapping colliders with initially deactivated physics for exploding wall bricks.
 
 The following video shows the continuous world generation by using physics
 collisions triggers:
@@ -44,3 +45,8 @@ A platform prefab showing the triggers used for spawning new platforms
 ahead of the player:
 
 ![](.readme/box-triggers.png)
+
+One of the bigger obstacles in the game, the wall, being blasted away
+by the magic spell projectile:
+
+![](.readme/blasting-boxes.jpg)
