@@ -3224,6 +3224,8 @@ MonoBehaviour:
   - {fileID: 2948907017317103923}
   - {fileID: 2948907016264038269}
   - {fileID: 2948907016730282460}
+  explosionPrefab: {fileID: 6649455463394085932, guid: f94ca4b6af191f5e7811f66d8941ceae,
+    type: 3}
 --- !u!1 &2948907017317103923
 GameObject:
   m_ObjectHideFlags: 0
