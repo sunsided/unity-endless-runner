@@ -990,10 +990,10 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 442659755}
         m_MethodName: UpdateMusicVolume
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 442659754}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1011,6 +1011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73743be052fcbad2bb901631ea763ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultVolume: 0.25
 --- !u!1 &496600726
 GameObject:
   m_ObjectHideFlags: 0
