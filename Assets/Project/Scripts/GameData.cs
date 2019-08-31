@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,26 +11,18 @@ namespace Project.Scripts
 
         public Text scoreText;
         public Text highscoreText;
+
+        public GameObject musicVolumeSlider;
+        public GameObject sfxVolumeSlider;
+
+        public float defaultMusicVolume = 0.25f;
+        public float defaultSfxVolume = 0.5f;
+
+        private readonly List<AudioSource> _music = new List<AudioSource>();
+        private readonly List<AudioSource> _sfx = new List<AudioSource>();
+
         private int _score;
         private int _highScore;
-
-        private void Awake()
-        {
-            // If this scene creates a new version of the game object, destroy it.
-            // This solves the problem of creating a new instance of the game object
-            // whenever we enter a scene that contains a reference to it.
-            var gd = GameObject.FindGameObjectsWithTag("GameData");
-            if (gd.Length > 1)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            DontDestroyOnLoad(gameObject);
-            Singleton = this;
-
-            PlayerPrefs.SetInt(PlayerPrefKeys.Score, 0);
-        }
 
         public void AddScore(int value)
         {
@@ -60,6 +53,69 @@ namespace Project.Scripts
             PlayerPrefs.SetInt(PlayerPrefKeys.Score, 0);
             UpdateScoreDisplay();
         }
+
+        public void UpdateMusicVolume(float volume)
+        {
+            PlayerPrefs.SetFloat(PlayerPrefKeys.MusicVolume, volume);
+            foreach (var source in _music)
+            {
+                source.volume = volume;
+            }
+        }
+
+        public void UpdateSoundVolume(float volume)
+        {
+            PlayerPrefs.SetFloat(PlayerPrefKeys.SoundVolume, volume);
+            foreach (var source in _sfx)
+            {
+                source.volume = volume;
+            }
+        }
+
+        private void Awake()
+        {
+            // If this scene creates a new version of the game object, destroy it.
+            // This solves the problem of creating a new instance of the game object
+            // whenever we enter a scene that contains a reference to it.
+            var gd = GameObject.FindGameObjectsWithTag("GameData");
+            if (gd.Length > 1)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            DontDestroyOnLoad(gameObject);
+            Singleton = this;
+
+            // Set current score.
+            PlayerPrefs.SetInt(PlayerPrefKeys.Score, 0);
+
+            // Grab all audio sources.
+            var audioSources = GameObject.FindWithTag("GameData").GetComponentsInChildren<AudioSource>();
+            Debug.Assert(audioSources.Length > 1, "allAS.Length > 0");
+
+            // Note that we're picking the FIRST audio source here, as that's the music.
+            _music.Add(audioSources[0]);
+
+            // Note that we're NOT picking the first audio player here, because that's the music.
+            for (var i = 1; i < audioSources.Length; ++i)
+            {
+                _sfx.Add(audioSources[i]);
+            }
+
+            InitializeMusicVolume();
+            InitializeSoundVolume();
+        }
+
+        private void InitializeMusicVolume() =>
+            UpdateMusicVolume(PlayerPrefs.HasKey(PlayerPrefKeys.MusicVolume)
+                ? PlayerPrefs.GetFloat(PlayerPrefKeys.MusicVolume)
+                : defaultMusicVolume);
+
+        private void InitializeSoundVolume() =>
+            UpdateSoundVolume(PlayerPrefs.HasKey(PlayerPrefKeys.SoundVolume)
+                ? PlayerPrefs.GetFloat(PlayerPrefKeys.SoundVolume)
+                : defaultSfxVolume);
 
         private void UpdateScoreDisplay()
         {

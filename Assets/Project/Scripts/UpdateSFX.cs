@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Project.Scripts
@@ -7,47 +6,26 @@ namespace Project.Scripts
     public class UpdateSFX : MonoBehaviour
     {
         public float defaultVolume = 0.5f;
-        private readonly List<AudioSource> _sfx = new List<AudioSource>();
+
         private Slider _slider;
+        private GameData _gameData;
 
         private void Awake()
         {
             _slider = GetComponent<Slider>();
         }
 
-        private void Start()
+        public void Start()
         {
-            var audioSources = GameObject.FindWithTag("GameData").GetComponentsInChildren<AudioSource>();
+            _gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
 
-            // Note that we're NOT picking the first audio player here, because that's the music.
-            Debug.Assert(audioSources.Length > 1, "allAS.Length > 1");
-            for (var i = 1; i < audioSources.Length; ++i)
-            {
-                _sfx.Add(audioSources[i]);
-            }
+            Debug.Assert(PlayerPrefs.HasKey(PlayerPrefKeys.SoundVolume), "PlayerPrefs.HasKey(PlayerPrefKeys.SoundVolume)");
+            var storedValue = PlayerPrefs.GetFloat(PlayerPrefKeys.SoundVolume);
+            _slider.value = storedValue;
 
-            if (PlayerPrefs.HasKey(PlayerPrefKeys.SoundVolume))
-            {
-                var storedValue = PlayerPrefs.GetFloat(PlayerPrefKeys.SoundVolume);
-                _slider.value = storedValue;
-                UpdateSoundVolume(storedValue);
-            }
-            else
-            {
-                _slider.value = defaultVolume;
-                UpdateSoundVolume(defaultVolume);
-            }
+            UpdateSoundVolume();
         }
 
-        public void UpdateSoundVolume() => UpdateSoundVolume(_slider.value);
-
-        private void UpdateSoundVolume(float volume)
-        {
-            PlayerPrefs.SetFloat(PlayerPrefKeys.SoundVolume, volume);
-            foreach (var source in _sfx)
-            {
-                source.volume = volume;
-            }
-        }
+        public void UpdateSoundVolume() => _gameData.UpdateSoundVolume(_slider.value);
     }
 }
