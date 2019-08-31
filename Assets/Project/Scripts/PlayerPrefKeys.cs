@@ -10,7 +10,7 @@ namespace Project.Scripts
         // TODO: Might as well make these actual properties.
 
         [NotNull]
-        public static readonly string SoundVolume = "soundVolume";
+        public static readonly string SoundVolume = "sfxVolume";
 
         [NotNull]
         public static readonly string MusicVolume = "musicVolume";

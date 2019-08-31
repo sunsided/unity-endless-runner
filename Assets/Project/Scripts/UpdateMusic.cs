@@ -18,6 +18,8 @@ namespace Project.Scripts
         private void Start()
         {
             var audioSources = GameObject.FindWithTag("GameData").GetComponentsInChildren<AudioSource>();
+
+            // Note that we're picking the FIRST audio source here, as that's the music.
             Debug.Assert(audioSources.Length > 0, "allAS.Length > 0");
             _music.Add(audioSources[0]);
 
