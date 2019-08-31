@@ -189,6 +189,12 @@ namespace Project.Scripts
             Invoke(nameof(KillMagic), 1);
         }
 
+        [UsedImplicitly]
+        private void FootStepLeft() => GameData.Singleton.SoundFootstep1.Play();
+
+        [UsedImplicitly]
+        private void FootStepRight() => GameData.Singleton.SoundFootstep2.Play();
+
         private void KillMagic()
         {
             magic.SetActive(false);
